@@ -50,6 +50,15 @@ data$status <- as.factor(data$status)
 #
 # Table 1: Characteristics of the study population
 #
+# SGA: Binary outcome (=1)
+# status: refugee (=1), migrant (=2)
+# AGE_GRAV: age and gravidity (6 levels)
+# wtless40: weight<40kg (=1), weight≥40kg (=0)
+# ANAEMIA: anaemia during pregnancy (=1), non-anaemia (=0)
+# EC_PRE_EC: pre-eclampsia (=1), no pre-eclampsia (=0)
+# mip: malaria in pregnancy (=1)
+# dfcT1: first ANC visit in trimester 1 (=1)
+# Study_year: every 5 years one category
 prop.table(table(data$SGA))
 table(data$SGA)
 prop.table(table(data$status))
@@ -191,9 +200,9 @@ prop.table(table(data[data$mip == 1,]$Study_year, data[data$mip == 1,]$SGA), mar
 #
 data$Study_year <- as.numeric(data$Study_year)
 data <- data %>%
-  filter(mip == 0, Study_year > 3)
+  filter(mip == 0, Study_year > 3) # non-malaria 2000-2020 cohort filter
 data$Study_year <- as.factor(data$Study_year)
-data <- data[, -6]  #remove mip column
+data <- data[, -6]  #remove malaria (mip) column
 
 prop.table(table(data$SGA))
 table(data$SGA)
